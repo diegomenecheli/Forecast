@@ -9,4 +9,8 @@ interface ViewHome {
         fun hideProgressBar()
         fun showForecast(forecast: List<ConsolidatedWeather>)
     }
+
+    interface Details {
+        fun showForecastDetails(details: ConsolidatedWeather)
+    }
 }

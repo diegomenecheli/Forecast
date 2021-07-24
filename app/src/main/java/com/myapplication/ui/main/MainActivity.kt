@@ -1,5 +1,7 @@
-package com.myapplication.ui
+package com.myapplication.ui.main
 
+import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +11,8 @@ import com.myapplication.model.information.ConsolidatedWeather
 import com.myapplication.model.information.data.ForecastDataSource
 import com.myapplication.presenter.ViewHome
 import com.myapplication.presenter.forecast.ForecastPresenter
+import com.myapplication.ui.AbstractActivity
+import com.myapplication.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AbstractActivity(), ViewHome.View {
@@ -28,7 +32,7 @@ class MainActivity : AbstractActivity(), ViewHome.View {
         presenter = ForecastPresenter(this, dataSource)
         presenter.requestAll()
         configRecycler()
-//        clickAdapter()
+        clickAdapter()
     }
 
     private fun configRecycler() {
@@ -53,6 +57,14 @@ class MainActivity : AbstractActivity(), ViewHome.View {
 
     override fun showForecast(forecast: List<ConsolidatedWeather>) {
         mainAdapter.differ.submitList(forecast.toList())
+    }
+
+    private fun clickAdapter() {
+        mainAdapter.setOnClickListener { forecast ->
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.putExtra("forecast", forecast)
+            startActivity(intent)
+        }
     }
 
 }

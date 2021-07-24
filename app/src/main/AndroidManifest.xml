@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Forecast">
         <activity
-            android:name=".ui.MainActivity">
+            android:name=".ui.details.DetailsActivity"
+            android:label="@string/title_details"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
