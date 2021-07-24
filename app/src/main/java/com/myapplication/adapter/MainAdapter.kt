@@ -1,18 +1,24 @@
 package com.myapplication.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.myapplication.R
 import com.myapplication.model.information.ConsolidatedWeather
 import com.myapplication.utils.Constants.Companion.SVG_URL
 import kotlinx.android.synthetic.main.item_forecast.view.*
+import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.lang.Math.round
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -43,13 +49,14 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ForecastViewHolder>() {
 
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
+        //get full url svg
         val forecast = differ.currentList[position]
         val typeWeather = forecast.weather_state_abbr
-        val svgUrl = "$SVG_URL/${typeWeather}.svg".toHttpUrl()
+        val svgUrl = "$SVG_URL${typeWeather}.svg".toHttpUrl()
         holder.itemView.apply {
             tv_day_forecast.text = getWeekDayName(forecast.applicable_date)
             tv_min_and_max.text = "${round(forecast.min_temp)}°/${round(forecast.max_temp)}°"
-            iv_weather.load(svgUrl)
+            iv_weather.loadSvg(svgUrl)
 
             setOnClickListener {
                 onItemClickListener?.let { click ->
@@ -73,14 +80,35 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ForecastViewHolder>() {
         onItemClickListener = listener
     }
 
-    fun getWeekDayName(s: String?): String? {
+    //return string with the name of the day
+    fun getWeekDayName(dateForecast: String?): String? {
+        var date = Date()
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val todayDate: String = formatter.format(date)
+
         val dtfOutput: DateTimeFormatter = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)
-        return LocalDate.parse(s).format(dtfOutput)
+        Log.d("xuxa", "getWeekDayName: $dateForecast")
+        Log.d("xuxa", "getWeekDayName: $todayDate")
+        if(dateForecast == todayDate){
+            return "Today"
+        }
+        return LocalDate.parse(dateForecast).format(dtfOutput)
     }
 
-    fun getTodayDayName(s: String?): String? {
-        val dtfOutput: DateTimeFormatter = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)
-        return LocalDate.parse(s).format(dtfOutput)
+    //load svg from url
+    fun ImageView.loadSvg(url: HttpUrl) {
+        val imageLoader = ImageLoader.Builder(this.context)
+            .componentRegistry { add(SvgDecoder(this@loadSvg.context)) }
+            .build()
+
+        val request = ImageRequest.Builder(this.context)
+            .crossfade(true)
+            .crossfade(500)
+            .data(url)
+            .target(this)
+            .build()
+
+        imageLoader.enqueue(request)
     }
 
 }

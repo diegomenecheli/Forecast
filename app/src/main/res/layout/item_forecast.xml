@@ -12,35 +12,46 @@
         android:background="@drawable/border_bg"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:padding="@dimen/custom_margin"
+        android:paddingStart="@dimen/forecast_margin"
+        android:paddingEnd="@dimen/custom_margin"
+        android:paddingTop="@dimen/forecast_margin"
+        android:paddingBottom="@dimen/forecast_margin"
         android:weightSum="3">
 
-        <TextView
-            android:id="@+id/tv_day_forecast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:textColor="@color/gray"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_min_and_max"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:textColor="@color/gray"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/iv_weather"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.8"
-            android:contentDescription="weather"
-            app:tint="@color/black" />
+            android:layout_weight="2.6"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_day_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_min_and_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_weather"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/custom_margin"
+            android:layout_weight="0.3"
+            android:contentDescription="weather" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
