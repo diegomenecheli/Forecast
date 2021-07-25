@@ -2,6 +2,8 @@ package com.myapplication.ui.main
 
 import android.content.Intent
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.myapplication.presenter.ViewHome
 import com.myapplication.presenter.forecast.ForecastPresenter
 import com.myapplication.ui.AbstractActivity
 import com.myapplication.ui.details.DetailsActivity
+import com.myapplication.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AbstractActivity(), ViewHome.View {
@@ -42,6 +45,17 @@ class MainActivity : AbstractActivity(), ViewHome.View {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_item, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Intent(this, SettingsActivity::class.java).apply {
+            startActivity(this)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun showProgressBar() {
         main_loading.visibility = View.VISIBLE
