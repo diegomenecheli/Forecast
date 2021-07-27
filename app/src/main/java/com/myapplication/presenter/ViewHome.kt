@@ -1,6 +1,7 @@
 package com.myapplication.presenter
 
 import com.myapplication.model.information.ConsolidatedWeather
+import com.myapplication.model.information.ForecastResponse
 import com.myapplication.model.search.LocationItem
 
 interface ViewHome {
@@ -8,7 +9,7 @@ interface ViewHome {
         fun showProgressBar()
         fun showFailure(message: String)
         fun hideProgressBar()
-        fun showForecast(forecast: List<ConsolidatedWeather>)
+        fun showForecast(forecast: ForecastResponse)
     }
 
     interface Details {

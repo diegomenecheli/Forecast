@@ -13,21 +13,6 @@ class LocationsDataSource (context: Context) {
     private var db: LocationDataBase = LocationDataBase.getInstance(context)
     private var locationsRepository: LocationsRepository = LocationsRepository(db)
 
-//    fun searchLocation(term: String, callback: ForecastPresenter) {
-//        GlobalScope.launch(Dispatchers.Main) {
-//            val response = RetrofitInstance.api.searchLocation(term)
-//            if (response.isSuccessful) {
-//                response.body()?.let { locationResponse ->
-//                    callback.onSuccess(locationResponse)
-//                }
-//                callback.onComplete()
-//            } else {
-//                callback.onError(response.message())
-//                callback.onComplete()
-//            }
-//        }
-//    }
-
     fun saveLocation(location: LocationItem){
         GlobalScope.launch(Dispatchers.Main) {
             locationsRepository.updateInsert(location)

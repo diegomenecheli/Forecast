@@ -8,9 +8,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myapplication.R
 import com.myapplication.adapter.MainAdapter
-import com.myapplication.model.information.ConsolidatedWeather
+import com.myapplication.model.information.ForecastResponse
 import com.myapplication.model.information.data.ForecastDataSource
-import com.myapplication.model.search.LocationItem
 import com.myapplication.presenter.ViewHome
 import com.myapplication.presenter.forecast.ForecastPresenter
 import com.myapplication.ui.AbstractActivity
@@ -19,7 +18,7 @@ import com.myapplication.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings{
+class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
 
     private val mainAdapter by lazy {
         MainAdapter()
@@ -35,7 +34,7 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings{
         clickAdapter()
     }
 
-    private fun requestInformation(){
+    private fun requestInformation() {
         val dataSource = ForecastDataSource(
             this
         )
@@ -75,12 +74,10 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings{
         main_loading.visibility = View.INVISIBLE
     }
 
-
-
-    override fun showForecast(forecast: List<ConsolidatedWeather>) {
-        mainAdapter.differ.submitList(forecast.toList())
+    override fun showForecast(forecast: ForecastResponse) {
+        location_name.text = forecast.title
+        mainAdapter.differ.submitList(forecast.consolidated_weather)
     }
-
     private fun clickAdapter() {
         mainAdapter.setOnClickListener { forecast ->
             val intent = Intent(this, DetailsActivity::class.java)

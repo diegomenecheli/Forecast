@@ -2,7 +2,6 @@ package com.myapplication.presenter.forecast
 
 import com.myapplication.model.information.ForecastResponse
 import com.myapplication.model.information.data.ForecastDataSource
-import com.myapplication.model.search.LocationItem
 import com.myapplication.presenter.ViewHome
 
 class ForecastPresenter (
@@ -12,7 +11,7 @@ class ForecastPresenter (
 
 
     override fun onSuccess(forecastResponse: ForecastResponse) {
-        this.view.showForecast(forecastResponse.consolidated_weather)
+        this.view.showForecast(forecastResponse)
     }
 
     override fun getFavorite() {
