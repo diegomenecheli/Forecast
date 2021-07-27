@@ -1,3 +1,3 @@
 package com.myapplication.model.search
 
-class LocationResponse : ArrayList<LocationResponseItem>()
+class LocationResponse : ArrayList<LocationItem>()

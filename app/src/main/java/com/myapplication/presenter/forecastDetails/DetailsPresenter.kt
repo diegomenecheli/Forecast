@@ -1,4 +1,4 @@
-package com.myapplication.presenter.ForecastDetails
+package com.myapplication.presenter.forecastDetails
 
 import com.myapplication.model.information.ConsolidatedWeather
 import com.myapplication.model.information.data.ForecastDataSource

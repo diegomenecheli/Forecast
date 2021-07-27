@@ -1,7 +1,6 @@
 package com.myapplication.ui.main
 
 import android.content.Intent
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,32 +10,39 @@ import com.myapplication.R
 import com.myapplication.adapter.MainAdapter
 import com.myapplication.model.information.ConsolidatedWeather
 import com.myapplication.model.information.data.ForecastDataSource
+import com.myapplication.model.search.LocationItem
 import com.myapplication.presenter.ViewHome
 import com.myapplication.presenter.forecast.ForecastPresenter
 import com.myapplication.ui.AbstractActivity
 import com.myapplication.ui.details.DetailsActivity
 import com.myapplication.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
-class MainActivity : AbstractActivity(), ViewHome.View {
+class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings{
 
     private val mainAdapter by lazy {
         MainAdapter()
     }
 
-    private lateinit var presenter: ForecastPresenter
+    private lateinit var forecastPresenter: ForecastPresenter
 
     override fun getLayout(): Int = R.layout.activity_main
 
     override fun onInject() {
-        val dataSource = ForecastDataSource(
-            this
-        )
-        presenter = ForecastPresenter(this, dataSource)
-        presenter.requestAll()
+        requestInformation()
         configRecycler()
         clickAdapter()
     }
+
+    private fun requestInformation(){
+        val dataSource = ForecastDataSource(
+            this
+        )
+        forecastPresenter = ForecastPresenter(this, dataSource)
+        forecastPresenter.getFavorite()
+    }
+
 
     private fun configRecycler() {
         with(recycler_main) {
@@ -68,6 +74,8 @@ class MainActivity : AbstractActivity(), ViewHome.View {
     override fun hideProgressBar() {
         main_loading.visibility = View.INVISIBLE
     }
+
+
 
     override fun showForecast(forecast: List<ConsolidatedWeather>) {
         mainAdapter.differ.submitList(forecast.toList())

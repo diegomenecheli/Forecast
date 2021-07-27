@@ -1,23 +1,34 @@
 package com.myapplication.model.information.data
 
 import android.content.Context
+import com.myapplication.model.search.LocationItem
+import com.myapplication.model.search.data.LocationsRepository
+import com.myapplication.model.search.db.LocationDataBase
 import com.myapplication.network.RetrofitInstance
 import com.myapplication.presenter.forecast.ForecastHome
+import com.myapplication.presenter.settings.SettingsHome
 import kotlinx.coroutines.*
 
 class ForecastDataSource(context: Context) {
+    private var db: LocationDataBase = LocationDataBase.getInstance(context)
+    private var locationsRepository: LocationsRepository = LocationsRepository(db)
 
-    fun getLocationInformation(callback: ForecastHome.Presenter) {
-        GlobalScope.launch(Dispatchers.Main) {
-            val response = RetrofitInstance.api.getLocationInformation(44418)
-            if (response.isSuccessful) {
-                response.body()?.let { forecastResponse ->
-                    callback.onSuccess(forecastResponse)
+    fun getFavoriteLocation(callback: ForecastHome.Presenter){
+        var favoriteLocation: LocationItem
+        CoroutineScope(Dispatchers.IO).launch {
+            favoriteLocation = locationsRepository.getFavorite()
+
+            withContext(Dispatchers.Main){
+                val response = RetrofitInstance.api.getLocationInformation(favoriteLocation.woeid)
+                if (response.isSuccessful) {
+                    response.body()?.let { forecastResponse ->
+                        callback.onSuccess(forecastResponse)
+                    }
+                    callback.onComplete()
+                } else {
+                    callback.onError(response.message())
+                    callback.onComplete()
                 }
-                callback.onComplete()
-            } else {
-                callback.onError(response.message())
-                callback.onComplete()
             }
         }
     }

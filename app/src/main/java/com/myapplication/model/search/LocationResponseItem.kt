@@ -1,8 +1,14 @@
 package com.myapplication.model.search
 
-data class LocationResponseItem(
-    val latt_long: String,
-    val location_type: String,
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.io.Serializable
+
+@Entity(tableName = "location")
+data class LocationItem(
+    @PrimaryKey(autoGenerate = false)
+    val woeid: Int,
     val title: String,
-    val woeid: Int
-)
+    val favorite: Boolean, //new Boolean column added
+) : Serializable
