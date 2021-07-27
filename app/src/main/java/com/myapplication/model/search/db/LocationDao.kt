@@ -10,7 +10,7 @@ import com.myapplication.model.search.LocationItem
 interface LocationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateInsert(location: LocationItem) : Long
+    suspend fun updateInsert(location: LocationItem): Long
 
     @Query("SELECT * FROM location")
     fun getAll(): List<LocationItem>
@@ -18,4 +18,9 @@ interface LocationDao {
     @Query("SELECT * FROM location WHERE favorite = :favorite")
     fun getFavorite(favorite: Boolean = true): LocationItem
 
+    @Query("UPDATE location SET favorite = :favorite WHERE woeid =:id")
+    suspend fun updateFavorite(favorite: Boolean, id: Int)
+
+    @Query("UPDATE location SET favorite = :favorite")
+    suspend fun removeAllFavorites(favorite: Boolean)
 }

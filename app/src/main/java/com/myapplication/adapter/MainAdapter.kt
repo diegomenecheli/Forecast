@@ -49,7 +49,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ForecastViewHolder>() {
             tv_min_and_max.text = "${round(forecast.min_temp)}°/${round(forecast.max_temp)}°"
             iv_weather.loadSvg(getUrl(forecast))
             setOnClickListener {
-                Log.d("xuxa", "getWeekDayName:")
                 onItemClickListener?.let { click ->
                     click(forecast)
                 }

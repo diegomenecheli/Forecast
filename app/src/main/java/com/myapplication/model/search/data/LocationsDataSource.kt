@@ -13,9 +13,10 @@ class LocationsDataSource (context: Context) {
     private var db: LocationDataBase = LocationDataBase.getInstance(context)
     private var locationsRepository: LocationsRepository = LocationsRepository(db)
 
-    fun saveLocation(location: LocationItem){
+    fun saveFavorite(location: LocationItem){
         GlobalScope.launch(Dispatchers.Main) {
-            locationsRepository.updateInsert(location)
+            locationsRepository.removeAllFavorites()
+            locationsRepository.updateFavorite(location)
         }
     }
 

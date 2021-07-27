@@ -1,5 +1,6 @@
 package com.myapplication.ui.settings
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,11 +42,10 @@ class SettingsActivity : AbstractActivity(), ViewHome.Settings {
     }
 
     private fun clickAdapter() {
-//        mainAdapter.setOnClickListener { forecast ->
-//            val intent = Intent(this, DetailsActivity::class.java)
-//            intent.putExtra("forecast", forecast)
-//            startActivity(intent)
-//        }
+        buttonsAdapter.setOnClickListener { location ->
+            presenter.saveFavorite(location)
+            finish()
+        }
     }
 
     override fun showProgressBar() {

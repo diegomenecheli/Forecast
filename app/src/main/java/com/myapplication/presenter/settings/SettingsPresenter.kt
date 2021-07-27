@@ -17,7 +17,7 @@ class SettingsPresenter(
 
     fun saveFavorite(location: LocationItem) {
         this.view.showProgressBar()
-        this.dataSource.saveLocation(location)
+        this.dataSource.saveFavorite(location)
     }
 
 

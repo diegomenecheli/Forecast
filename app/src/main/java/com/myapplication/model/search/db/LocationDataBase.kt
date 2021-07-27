@@ -19,9 +19,10 @@ abstract class LocationDataBase : RoomDatabase() {
 
         @Volatile
         private var instance: LocationDataBase? = null
+        private val Lock = Any()
 
         fun getInstance(context: Context): LocationDataBase =
-            instance ?: synchronized(this) {
+            instance ?: synchronized(Lock) {
                 instance ?: createdDatabase(context).also { instance = it }
             }
 

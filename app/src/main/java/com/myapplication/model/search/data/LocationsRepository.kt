@@ -5,7 +5,9 @@ import com.myapplication.model.search.db.LocationDataBase
 
 class LocationsRepository (private val db: LocationDataBase) {
 
-    suspend fun updateInsert(location: LocationItem) = db.getLocationDao().updateInsert(location)
+    suspend fun updateFavorite(location: LocationItem) = db.getLocationDao().updateFavorite(true, location.woeid)
+
+    suspend fun removeAllFavorites() = db.getLocationDao().removeAllFavorites(false)
 
     fun getAll(): List<LocationItem> = db.getLocationDao().getAll()
 

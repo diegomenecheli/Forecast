@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
+import com.myapplication.model.information.ConsolidatedWeather
 import com.myapplication.model.search.LocationItem
 import com.myapplication.ui.main.MainActivity
 import kotlinx.android.synthetic.main.item_radio_buttons.view.*
@@ -41,14 +42,20 @@ class ButtonsAdapter : RecyclerView.Adapter<ButtonsAdapter.ButtonsViewHolder>() 
 
     override fun onBindViewHolder(holder: ButtonsViewHolder, position: Int) {
         val location = differ.currentList[position]
-        Log.d("xuxa", "onBindViewHolder: " + location)
         holder.itemView.apply {
             radio_button.text = location.title
-            setOnClickListener{
-                //TODO FAVORITE PLACE
-                (context as Activity).finish()
+            radio_button.setOnClickListener {
+                onItemClickListener?.let { click ->
+                    click(location)
+                }
             }
         }
+    }
+
+    private var onItemClickListener: ((LocationItem) -> Unit)? = null
+
+    fun setOnClickListener(listener: (LocationItem) -> Unit) {
+        onItemClickListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ButtonsViewHolder =
