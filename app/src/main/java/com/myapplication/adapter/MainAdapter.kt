@@ -1,6 +1,5 @@
 package com.myapplication.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +8,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
 import com.myapplication.model.information.ConsolidatedWeather
-import com.myapplication.utils.Constants.Companion.SVG_URL
 import com.myapplication.utils.GetDayWeek.Companion.getWeekDayName
 import com.myapplication.utils.LoadSvg.Companion.getUrl
 import com.myapplication.utils.LoadSvg.Companion.loadSvg
 import kotlinx.android.synthetic.main.item_forecast.view.*
-import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.lang.Math.round
 
 

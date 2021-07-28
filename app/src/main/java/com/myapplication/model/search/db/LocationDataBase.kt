@@ -35,16 +35,14 @@ abstract class LocationDataBase : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         GlobalScope.launch(Dispatchers.Main) {
-                            getInstance(context).getLocationDao().updateInsert(PREPOPULATE_LISBON)
-                            getInstance(context).getLocationDao().updateInsert(PREPOPULATE_LONDON)
-                            getInstance(context).getLocationDao().updateInsert(PREPOPULATE_KINSHASA)
+                            getInstance(context).getLocationDao().updateInsert(PREPOPULATE_DATA)
                         }
                     }
                 })
                 .build()
 
-        val PREPOPULATE_LISBON = LocationItem(742676, "Lisbon", true)
-        val PREPOPULATE_LONDON = LocationItem( 44418,"London", false)
-        val PREPOPULATE_KINSHASA = LocationItem(1290062, "Kinshasa", true)
+        val PREPOPULATE_DATA = listOf<LocationItem>(LocationItem(742676, "Lisbon", false),
+            LocationItem( 44418,"London", false),
+            LocationItem(1290062, "Kinshasa", false))
     }
 }

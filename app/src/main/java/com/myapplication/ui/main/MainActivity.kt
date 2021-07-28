@@ -16,9 +16,6 @@ import com.myapplication.ui.AbstractActivity
 import com.myapplication.ui.details.DetailsActivity
 import com.myapplication.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
 
 class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
@@ -32,9 +29,7 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
     override fun getLayout(): Int = R.layout.activity_main
 
     override fun onInject() {
-        GlobalScope.launch(Dispatchers.Unconfined) {
-            requestInformation()
-        }
+        requestInformation()
         configRecycler()
         clickAdapter()
     }

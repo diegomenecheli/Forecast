@@ -3,8 +3,8 @@ package com.myapplication.ui.details
 import com.myapplication.R
 import com.myapplication.model.information.ConsolidatedWeather
 import com.myapplication.model.information.data.ForecastDataSource
-import com.myapplication.presenter.forecastDetails.DetailsPresenter
 import com.myapplication.presenter.ViewHome
+import com.myapplication.presenter.forecastDetails.DetailsPresenter
 import com.myapplication.ui.AbstractActivity
 import com.myapplication.utils.GetDayWeek.Companion.getWeekDayName
 import com.myapplication.utils.LoadSvg
@@ -19,13 +19,13 @@ class DetailsActivity : AbstractActivity(), ViewHome.Details {
     override fun getLayout(): Int = R.layout.activity_details
 
     override fun onInject() {
-        getHeroesDetails()
+        getForecastDetails()
         showForecastDetails(details)
         val dataSource = ForecastDataSource(this)
         presenter = DetailsPresenter(this, dataSource)
     }
 
-    private fun getHeroesDetails() {
+    private fun getForecastDetails() {
         intent.extras?.let { forecastSent ->
             details = forecastSent.get("forecast") as ConsolidatedWeather
         }

@@ -16,10 +16,10 @@ interface ViewHome {
         fun showForecastDetails(details: ConsolidatedWeather)
     }
 
-    interface Settings{
+    interface Settings {
         fun showProgressBar()
         fun showFailure(message: String)
         fun hideProgressBar()
-        fun showAllLocations(locations: List<LocationItem>){}
+        fun showAllLocations(locations: List<LocationItem>) {}
     }
 }

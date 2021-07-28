@@ -6,35 +6,35 @@ import com.myapplication.model.search.db.LocationDataBase
 import com.myapplication.presenter.settings.SettingsHome
 import kotlinx.coroutines.*
 
-class LocationsDataSource (context: Context) {
+class LocationsDataSource(context: Context) {
 
     private var db: LocationDataBase = LocationDataBase.getInstance(context)
     private var locationsRepository: LocationsRepository = LocationsRepository(db)
 
-    fun saveFavorite(location: LocationItem){
+    fun saveFavorite(location: LocationItem) {
         GlobalScope.launch(Dispatchers.Main) {
             locationsRepository.removeAllFavorites()
             locationsRepository.updateFavorite(location)
         }
     }
 
-    fun getAllLocations(callback: SettingsHome.Presenter){
+    fun getAllLocations(callback: SettingsHome.Presenter) {
         var allLocation: List<LocationItem>
         CoroutineScope(Dispatchers.IO).launch {
             allLocation = locationsRepository.getAll()
 
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 callback.onSuccess(allLocation)
             }
         }
     }
 
-    fun getFavoriteLocation(callback: SettingsHome.Presenter){
+    fun getFavoriteLocation(callback: SettingsHome.Presenter) {
         var favoriteLocation: LocationItem
         CoroutineScope(Dispatchers.IO).launch {
             favoriteLocation = locationsRepository.getFavorite()
 
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 callback.onFavorite(favoriteLocation)
             }
         }

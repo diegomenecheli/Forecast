@@ -10,7 +10,7 @@ import com.myapplication.model.search.LocationItem
 interface LocationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateInsert(location: LocationItem): Long
+    suspend fun updateInsert(location: List<LocationItem>)
 
     @Query("SELECT * FROM location")
     fun getAll(): List<LocationItem>

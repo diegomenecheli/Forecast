@@ -15,12 +15,16 @@ class ForecastDataSource(context: Context) {
     private var db: LocationDataBase = LocationDataBase.getInstance(context)
     private var locationsRepository: LocationsRepository = LocationsRepository(db)
 
-    fun getFavoriteLocation(callback: ForecastHome.Presenter){
+    fun getFavoriteLocation(callback: ForecastHome.Presenter) {
         var favoriteLocation: LocationItem
         CoroutineScope(Dispatchers.IO).launch {
             favoriteLocation = locationsRepository.getFavorite()
-            withContext(Dispatchers.Main){
-                val response = RetrofitInstance.api.getLocationInformation(favoriteLocation.woeid)
+            withContext(Dispatchers.Main) {
+                val response = if (favoriteLocation != null) {
+                    RetrofitInstance.api.getLocationInformation(favoriteLocation.woeid)
+                } else {
+                    RetrofitInstance.api.getLocationInformation(742676)
+                }
                 if (response.isSuccessful) {
                     response.body()?.let { forecastResponse ->
                         callback.onSuccess(forecastResponse)

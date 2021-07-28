@@ -4,7 +4,7 @@ import com.myapplication.model.information.ForecastResponse
 import com.myapplication.model.information.data.ForecastDataSource
 import com.myapplication.presenter.ViewHome
 
-class ForecastPresenter (
+class ForecastPresenter(
     val view: ViewHome.View,
     private val dataSource: ForecastDataSource
 ) : ForecastHome.Presenter {
@@ -16,7 +16,7 @@ class ForecastPresenter (
 
     override fun getFavorite() {
         this.view.showProgressBar()
-        this.dataSource.getFavoriteLocation( this)
+        this.dataSource.getFavoriteLocation(this)
     }
 
     override fun onError(message: String) {
