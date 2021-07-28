@@ -6,8 +6,10 @@ import com.myapplication.model.search.data.LocationsRepository
 import com.myapplication.model.search.db.LocationDataBase
 import com.myapplication.network.RetrofitInstance
 import com.myapplication.presenter.forecast.ForecastHome
-import com.myapplication.presenter.settings.SettingsHome
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ForecastDataSource(context: Context) {
     private var db: LocationDataBase = LocationDataBase.getInstance(context)
@@ -17,7 +19,6 @@ class ForecastDataSource(context: Context) {
         var favoriteLocation: LocationItem
         CoroutineScope(Dispatchers.IO).launch {
             favoriteLocation = locationsRepository.getFavorite()
-
             withContext(Dispatchers.Main){
                 val response = RetrofitInstance.api.getLocationInformation(favoriteLocation.woeid)
                 if (response.isSuccessful) {

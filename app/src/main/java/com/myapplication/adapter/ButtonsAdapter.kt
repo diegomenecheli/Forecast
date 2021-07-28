@@ -1,8 +1,5 @@
 package com.myapplication.adapter
 
-import android.app.Activity
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.myapplication.R
-import com.myapplication.model.information.ConsolidatedWeather
 import com.myapplication.model.search.LocationItem
-import com.myapplication.ui.main.MainActivity
 import kotlinx.android.synthetic.main.item_radio_buttons.view.*
 
 

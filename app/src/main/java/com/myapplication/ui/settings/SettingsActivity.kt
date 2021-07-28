@@ -1,6 +1,5 @@
 package com.myapplication.ui.settings
 
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager

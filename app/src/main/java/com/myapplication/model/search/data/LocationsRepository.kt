@@ -11,6 +11,6 @@ class LocationsRepository (private val db: LocationDataBase) {
 
     fun getAll(): List<LocationItem> = db.getLocationDao().getAll()
 
-    fun getFavorite(): LocationItem = db.getLocationDao().getFavorite()
+    suspend fun getFavorite(): LocationItem = db.getLocationDao().getFavorite()
 
 }

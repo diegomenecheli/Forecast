@@ -16,7 +16,7 @@ interface LocationDao {
     fun getAll(): List<LocationItem>
 
     @Query("SELECT * FROM location WHERE favorite = :favorite")
-    fun getFavorite(favorite: Boolean = true): LocationItem
+    suspend fun getFavorite(favorite: Boolean = true): LocationItem
 
     @Query("UPDATE location SET favorite = :favorite WHERE woeid =:id")
     suspend fun updateFavorite(favorite: Boolean, id: Int)

@@ -3,8 +3,6 @@ package com.myapplication.model.search.data
 import android.content.Context
 import com.myapplication.model.search.LocationItem
 import com.myapplication.model.search.db.LocationDataBase
-import com.myapplication.network.RetrofitInstance
-import com.myapplication.presenter.forecast.ForecastPresenter
 import com.myapplication.presenter.settings.SettingsHome
 import kotlinx.coroutines.*
 

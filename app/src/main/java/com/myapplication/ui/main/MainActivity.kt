@@ -16,6 +16,9 @@ import com.myapplication.ui.AbstractActivity
 import com.myapplication.ui.details.DetailsActivity
 import com.myapplication.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
@@ -29,7 +32,9 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
     override fun getLayout(): Int = R.layout.activity_main
 
     override fun onInject() {
-        requestInformation()
+        GlobalScope.launch(Dispatchers.Unconfined) {
+            requestInformation()
+        }
         configRecycler()
         clickAdapter()
     }
@@ -52,6 +57,7 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
 
     override fun onResume() {
         super.onResume()
+
         requestInformation()
     }
 
@@ -83,6 +89,7 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
         location_name.text = forecast.title
         mainAdapter.differ.submitList(forecast.consolidated_weather)
     }
+
     private fun clickAdapter() {
         mainAdapter.setOnClickListener { forecast ->
             val intent = Intent(this, DetailsActivity::class.java)

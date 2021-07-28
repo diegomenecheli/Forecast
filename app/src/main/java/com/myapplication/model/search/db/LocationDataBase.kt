@@ -43,7 +43,7 @@ abstract class LocationDataBase : RoomDatabase() {
                 })
                 .build()
 
-        val PREPOPULATE_LISBON = LocationItem(742676, "Lisbon", false)
+        val PREPOPULATE_LISBON = LocationItem(742676, "Lisbon", true)
         val PREPOPULATE_LONDON = LocationItem( 44418,"London", false)
         val PREPOPULATE_KINSHASA = LocationItem(1290062, "Kinshasa", true)
     }
