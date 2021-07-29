@@ -68,5 +68,4 @@ class SettingsActivity : AbstractActivity(), ViewHome.Settings {
     override fun showAllLocations(locations: List<LocationItem>) {
         buttonsAdapter.differ.submitList(locations.toList())
     }
-
 }

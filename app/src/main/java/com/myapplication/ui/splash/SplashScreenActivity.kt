@@ -1,7 +1,6 @@
 package com.myapplication.ui.splash
 
 import android.content.Intent
-import android.util.Log
 import com.myapplication.R
 import com.myapplication.model.information.ForecastResponse
 import com.myapplication.model.information.data.ForecastDataSource
@@ -29,13 +28,12 @@ class SplashScreenActivity : AbstractActivity(), ViewHome.View {
         forecastPresenter.getFavorite()
     }
 
-    private fun exitSplash(){
+    private fun exitSplash() {
         iv_sun.alpha = 0f
-        iv_sun.animate().setDuration(800).alpha(1f).withEndAction(){
+        iv_sun.animate().setDuration(800).alpha(1f).withEndAction {
             requestInformation()
         }
     }
-
 
     override fun showForecast(forecast: ForecastResponse) {
         val intent = Intent(this, MainActivity::class.java)
@@ -44,7 +42,4 @@ class SplashScreenActivity : AbstractActivity(), ViewHome.View {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
     }
-
-
-
 }

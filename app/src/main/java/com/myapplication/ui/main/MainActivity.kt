@@ -30,6 +30,7 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
     override fun getLayout(): Int = R.layout.activity_main
 
     override fun onInject() {
+        getForecastDetails()
         configRecycler()
         clickAdapter()
     }
@@ -41,7 +42,6 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
         forecastPresenter = ForecastPresenter(this, dataSource)
         forecastPresenter.getFavorite()
     }
-
 
     private fun configRecycler() {
         with(recycler_main) {
@@ -99,5 +99,4 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
             startActivity(intent)
         }
     }
-
 }

@@ -1,7 +1,6 @@
 package com.myapplication.model.information.data
 
 import android.content.Context
-import android.util.Log
 import com.myapplication.model.search.LocationItem
 import com.myapplication.model.search.data.LocationsRepository
 import com.myapplication.model.search.db.LocationDataBase
