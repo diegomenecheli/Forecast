@@ -1,5 +1,7 @@
 package com.myapplication.model.information
 
+import java.io.Serializable
+
 data class ForecastResponse(
     val consolidated_weather: MutableList<ConsolidatedWeather>,
     val latt_long: String,
@@ -13,4 +15,4 @@ data class ForecastResponse(
     val timezone_name: String,
     val title: String,
     val woeid: Int
-)
+) : Serializable

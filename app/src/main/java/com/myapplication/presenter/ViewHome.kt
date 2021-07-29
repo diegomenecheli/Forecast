@@ -6,9 +6,9 @@ import com.myapplication.model.search.LocationItem
 
 interface ViewHome {
     interface View {
-        fun showProgressBar()
-        fun showFailure(message: String)
-        fun hideProgressBar()
+        fun showProgressBar() {}
+        fun showFailure(message: String) {}
+        fun hideProgressBar() {}
         fun showForecast(forecast: ForecastResponse)
     }
 

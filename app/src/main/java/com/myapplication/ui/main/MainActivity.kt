@@ -24,12 +24,13 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
         MainAdapter()
     }
 
+    private lateinit var details: ForecastResponse
     private lateinit var forecastPresenter: ForecastPresenter
 
     override fun getLayout(): Int = R.layout.activity_main
 
     override fun onInject() {
-        requestInformation()
+        getForecastDetails()
         configRecycler()
         clickAdapter()
     }
@@ -52,7 +53,6 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
 
     override fun onResume() {
         super.onResume()
-
         requestInformation()
     }
 
@@ -83,6 +83,14 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
     override fun showForecast(forecast: ForecastResponse) {
         location_name.text = forecast.title
         mainAdapter.differ.submitList(forecast.consolidated_weather)
+    }
+
+    private fun getForecastDetails() {
+        intent.extras?.let { forecast ->
+            details = forecast.get("forecast") as ForecastResponse
+            location_name.text = details.title
+            mainAdapter.differ.submitList(details.consolidated_weather)
+        }
     }
 
     private fun clickAdapter() {
