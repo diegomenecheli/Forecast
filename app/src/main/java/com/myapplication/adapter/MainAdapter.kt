@@ -33,11 +33,9 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ForecastViewHolder>() {
         ): Boolean {
             return oldItem == newItem
         }
-
     }
 
     val differ = AsyncListDiffer(this, differCallback)
-
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
         val forecast = differ.currentList[position]

@@ -28,15 +28,4 @@ class LocationsDataSource(context: Context) {
             }
         }
     }
-
-    fun getFavoriteLocation(callback: SettingsHome.Presenter) {
-        var favoriteLocation: LocationItem
-        CoroutineScope(Dispatchers.IO).launch {
-            favoriteLocation = locationsRepository.getFavorite()
-
-            withContext(Dispatchers.Main) {
-                callback.onFavorite(favoriteLocation)
-            }
-        }
-    }
 }
