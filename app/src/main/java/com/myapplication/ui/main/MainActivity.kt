@@ -95,7 +95,7 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
     private fun clickAdapter() {
         mainAdapter.setOnClickListener { forecast ->
             val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("forecast", forecast)
+            intent.putExtra("forecastDetails", forecast)
             startActivity(intent)
         }
     }

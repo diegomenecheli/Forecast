@@ -27,8 +27,13 @@ class DetailsActivity : AbstractActivity(), ViewHome.Details {
 
     private fun getForecastDetails() {
         intent.extras?.let { forecastSent ->
-            details = forecastSent.get("forecast") as ConsolidatedWeather
+            details = forecastSent.get("forecastDetails") as ConsolidatedWeather
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     override fun showForecastDetails(details: ConsolidatedWeather) {
