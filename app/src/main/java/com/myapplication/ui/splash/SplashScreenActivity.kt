@@ -22,7 +22,6 @@ class SplashScreenActivity : AbstractActivity(), ViewHome.View {
     }
 
     private fun requestInformation() {
-        Log.d("xuxa", "requestInformation: ")
         val dataSource = ForecastDataSource(
             this
         )
@@ -32,15 +31,13 @@ class SplashScreenActivity : AbstractActivity(), ViewHome.View {
 
     private fun exitSplash(){
         iv_sun.alpha = 0f
-        iv_sun.animate().setDuration(1200).alpha(1f).withEndAction(){
-            Log.d("xuxa", "end: ")
+        iv_sun.animate().setDuration(800).alpha(1f).withEndAction(){
             requestInformation()
         }
     }
 
 
     override fun showForecast(forecast: ForecastResponse) {
-        Log.d("xuxa", "showForecast: $forecast")
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("forecast", forecast)
         startActivity(intent)

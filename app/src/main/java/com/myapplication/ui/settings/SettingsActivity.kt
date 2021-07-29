@@ -1,5 +1,6 @@
 package com.myapplication.ui.settings
 
+import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.myapplication.model.search.data.LocationsDataSource
 import com.myapplication.presenter.ViewHome
 import com.myapplication.presenter.settings.SettingsPresenter
 import com.myapplication.ui.AbstractActivity
+import com.myapplication.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AbstractActivity(), ViewHome.Settings {
@@ -43,6 +45,10 @@ class SettingsActivity : AbstractActivity(), ViewHome.Settings {
     private fun clickAdapter() {
         buttonsAdapter.setOnClickListener { location ->
             presenter.saveFavorite(location)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("forecast", location)
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
     }

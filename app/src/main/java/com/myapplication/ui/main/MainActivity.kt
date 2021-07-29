@@ -30,7 +30,6 @@ class MainActivity : AbstractActivity(), ViewHome.View, ViewHome.Settings {
     override fun getLayout(): Int = R.layout.activity_main
 
     override fun onInject() {
-        getForecastDetails()
         configRecycler()
         clickAdapter()
     }

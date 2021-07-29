@@ -21,11 +21,9 @@ class ForecastDataSource(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             favoriteLocation = locationsRepository.getFavorite()
             withContext(Dispatchers.Main) {
-                Log.d("xuxa", "favoriteLocation: ")
                 val response = if (favoriteLocation != null) {
                     RetrofitInstance.api.getLocationInformation(favoriteLocation.woeid)
                 } else {
-                    Log.d("xuxa", "else: ")
                     RetrofitInstance.api.getLocationInformation(742676)
                 }
                 if (response.isSuccessful) {
